@@ -51,7 +51,6 @@ public class PaletteController {
 
     @GetMapping("/user/{username}")
     public ResponseEntity<List<Palette>> getUserPalettes(@PathVariable String username) {
-        // Находим пользователя по имени
         Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isEmpty()) {
             return ResponseEntity.status(404).body(null);
