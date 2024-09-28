@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/users/register", "/login", "/h2-console/**",
+                        .requestMatchers("/", "/home", "/login", "/users/register", "/h2-console/**",
                                 "/avatars/**", "/users/{username}", "/create-palette", "/palettes/create",
                                 "/palettes/user/{username}", "/palettes/{id}/likes", "/palettes/user/{username}/likes",
                                 "palettes/public", "/palettes/user/{username}/public", "/palettes/user/{username}/likes/public",
