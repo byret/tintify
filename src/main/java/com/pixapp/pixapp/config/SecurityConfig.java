@@ -54,7 +54,9 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .headers(headers -> headers.frameOptions().sameOrigin())
-                .userDetailsService(userService);
+                .userDetailsService(userService) // Переносим userDetailsService сюда
+                .requiresChannel()  // Указываем настройку для HTTPS после настройки userDetailsService
+                .anyRequest().requiresSecure(); // Все запросы требуют HTTPS
 
         return http.build();
     }
