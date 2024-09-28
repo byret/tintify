@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "./static/css/main.4efd9841.css",
+    "main.js": "./static/js/main.faba3d52.js",
+    "static/js/453.5c83f6a0.chunk.js": "./static/js/453.5c83f6a0.chunk.js",
+    "static/media/logo.png": "./static/media/logo.e95f887d62c7876d1815.png",
+    "static/media/liked-icon.png": "./static/media/liked-icon.9eb74ee355b4c52c2358.png",
+    "static/media/nokiafc22.ttf": "./static/media/nokiafc22.04dc8b649b961470b957.ttf",
+    "static/media/like-icon.png": "./static/media/like-icon.d3db36180effcd01aaf4.png",
+    "index.html": "./index.html",
+    "main.4efd9841.css.map": "./static/css/main.4efd9841.css.map",
+    "main.faba3d52.js.map": "./static/js/main.faba3d52.js.map",
+    "453.5c83f6a0.chunk.js.map": "./static/js/453.5c83f6a0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4efd9841.css",
+    "static/js/main.faba3d52.js"
+  ]
+}
