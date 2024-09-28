@@ -10,7 +10,7 @@ public class FrontendController {
         return "forward:/index.html";
     }
 
-    @RequestMapping("/error")
+    @RequestMapping("/custom-error")
     public String handleError() {
         // Можешь вернуть кастомную страницу ошибок
         return "error";
