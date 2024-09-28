@@ -4,6 +4,7 @@ import com.pixapp.pixapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -37,7 +38,7 @@ public class SecurityConfig {
                                 "/palettes/user/{username}", "/palettes/{id}/likes", "/palettes/user/{username}/likes",
                                 "palettes/public", "/palettes/user/{username}/public", "/palettes/user/{username}/likes/public",
                                 "arts/create", "/arts/save", "/arts/user/{username}", "/arts/user/{username}/public",
-                                "palettes/{id}/likes/users", "arts/public", "/error").permitAll()
+                                "palettes/{id}/likes/users", "arts/public").permitAll()
                         .requestMatchers("/users/edit/{username}", "/users/update-user-details",
                                 "/palettes/{id}/like").authenticated()
                         .anyRequest().authenticated()
@@ -99,7 +100,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserService();
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+        authProvider.setUserDetailsService(userService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
     }
 }
