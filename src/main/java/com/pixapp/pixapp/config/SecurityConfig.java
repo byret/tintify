@@ -37,7 +37,7 @@ public class SecurityConfig {
                                 "/palettes/user/{username}", "/palettes/{id}/likes", "/palettes/user/{username}/likes",
                                 "palettes/public", "/palettes/user/{username}/public", "/palettes/user/{username}/likes/public",
                                 "arts/create", "/arts/save", "/arts/user/{username}", "/arts/user/{username}/public",
-                                "palettes/{id}/likes/users", "arts/public").permitAll()
+                                "palettes/{id}/likes/users", "arts/public", "/error").permitAll()
                         .requestMatchers("/users/edit/{username}", "/users/update-user-details",
                                 "/palettes/{id}/like").authenticated()
                         .anyRequest().authenticated()
