@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/pixapp-frontend/node_modules
