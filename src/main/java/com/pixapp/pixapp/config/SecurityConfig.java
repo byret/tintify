@@ -55,7 +55,9 @@ public class SecurityConfig {
                         .failureHandler(customAuthenticationFailureHandler())
                         .permitAll()
                 )
-                .headers(headers -> headers.frameOptions().sameOrigin())
+                .headers(headers -> headers
+                        .contentSecurityPolicy("default-src 'self' https://your-netlify-domain.netlify.app; script-src 'self'; connect-src 'self' https://tintify-f9e20431ea39.herokuapp.com;")
+                )
                 .userDetailsService(userService);
 
         return http.build();
