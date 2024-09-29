@@ -35,9 +35,9 @@ public class SecurityConfig {
                         .requestMatchers("/", "/home", "/static/**", "/index.html", "/favicon.ico", "/login", "/users/register", "/h2-console/**",
                                 "/avatars/**", "/users/{username}", "/create-palette", "/palettes/create",
                                 "/palettes/user/{username}", "/palettes/{id}/likes", "/palettes/user/{username}/likes",
-                                "palettes/public", "/palettes/user/{username}/public", "/palettes/user/{username}/likes/public",
-                                "arts/create", "/arts/save", "/arts/user/{username}", "/arts/user/{username}/public",
-                                "palettes/{id}/likes/users", "arts/public").permitAll()
+                                "/palettes/public", "/palettes/user/{username}/public", "/palettes/user/{username}/likes/public",
+                                "/arts/create", "/arts/save", "/arts/user/{username}", "/arts/user/{username}/public",
+                                "/palettes/{id}/likes/users", "/arts/public").permitAll()
                         .requestMatchers("/users/edit/{username}", "/users/update-user-details",
                                 "/palettes/{id}/like").authenticated()
                         .anyRequest().authenticated()
@@ -87,7 +87,7 @@ public class SecurityConfig {
     @Bean
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
-        serializer.setSameSite("None");
+        serializer.setSameSite("Lax");
         serializer.setUseHttpOnlyCookie(true);
         serializer.setCookiePath("/");
         return serializer;
