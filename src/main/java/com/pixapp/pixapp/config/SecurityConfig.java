@@ -80,6 +80,7 @@ public class SecurityConfig {
         config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://tintify-f9e20431ea39.herokuapp.com"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.setExposedHeaders(Arrays.asList("Authorization", "Link", "X-Total-Count"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
