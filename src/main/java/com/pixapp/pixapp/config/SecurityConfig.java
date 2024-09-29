@@ -88,6 +88,7 @@ public class SecurityConfig {
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
         serializer.setSameSite("None");
+        serializer.setUseSecureCookie(true);
         serializer.setUseHttpOnlyCookie(true);
         serializer.setCookiePath("/");
         return serializer;
