@@ -1,6 +1,7 @@
 package com.pixapp.pixapp.config;
 
 import com.pixapp.pixapp.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,14 +47,11 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .successHandler((request, response, authentication) -> {
-                            String username = authentication.getName();
-                            response.getWriter().write("{\"message\": \"Login successful\", \"username\": \"" + username + "\"}");
+                            response.setStatus(HttpServletResponse.SC_OK);  // Статус 200 для успешного ответа
                             response.setContentType("application/json");
-                            response.setStatus(200);
-                            response.setHeader("Location", "https://sprightly-fenglisu-5c3f52.netlify.app/home");
-                            response.sendRedirect("https://sprightly-fenglisu-5c3f52.netlify.app/home");
+                            response.getWriter().write("{\"message\": \"Login successful\", \"redirectUrl\": \"https://sprightly-fenglisu-5c3f52.netlify.app/home\"}");
+                            response.getWriter().flush();
                         })
-                        .defaultSuccessUrl("/home", true)
                         .failureHandler(customAuthenticationFailureHandler())
                         .permitAll()
                 )
