@@ -55,7 +55,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .headers(headers -> headers.frameOptions().sameOrigin())
-                .userDetailsService(userService).addFilter()
+                .userDetailsService(userService)
                 .requiresChannel()
                 .anyRequest()
                 .requiresSecure();
