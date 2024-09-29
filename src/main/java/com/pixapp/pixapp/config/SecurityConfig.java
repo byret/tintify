@@ -56,7 +56,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .headers(headers -> headers
-                        .contentSecurityPolicy("default-src 'self' https://your-netlify-domain.netlify.app; script-src 'self'; connect-src 'self' https://tintify-f9e20431ea39.herokuapp.com;")
+                        .contentSecurityPolicy("default-src 'self' https://sprightly-fenglisu-5c3f52.netlify.app; script-src 'self'; connect-src 'self' https://tintify-f9e20431ea39.herokuapp.com;")
                 )
                 .userDetailsService(userService);
 
