@@ -74,7 +74,7 @@ public class SecurityConfig {
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://tintify-f9e20431ea39.herokuapp.com"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://tintify-f9e20431ea39.herokuapp.com", "https://66f8e690547b070008b803e2--sprightly-fenglisu-5c3f52.netlify.app"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.setExposedHeaders(Arrays.asList("Authorization", "Link", "X-Total-Count"));
