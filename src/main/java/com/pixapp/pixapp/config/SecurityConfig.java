@@ -51,6 +51,7 @@ public class SecurityConfig {
                             response.setContentType("application/json");
                             response.setStatus(200);
                         })
+                        .defaultSuccessUrl("/home", true)
                         .failureHandler(customAuthenticationFailureHandler())
                         .permitAll()
                 )
