@@ -55,10 +55,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .headers(headers -> headers.frameOptions().sameOrigin())
-                .userDetailsService(userService)
-                .requiresChannel()
-                .anyRequest()
-                .requiresSecure();
+                .userDetailsService(userService);
 
         return http.build();
     }
