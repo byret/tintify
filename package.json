@@ -2,9 +2,6 @@
   "name": "pixapp-backend",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "heroku-postbuild": "cd pixapp-frontend && npm install && npm run build && chmod +x node_modules/.bin/react-scripts"
-  },
 
   "engines": {
     "node": "16.x"
