@@ -50,6 +50,7 @@ public class SecurityConfig {
                             response.getWriter().write("{\"message\": \"Login successful\", \"username\": \"" + username + "\"}");
                             response.setContentType("application/json");
                             response.setStatus(200);
+                            response.sendRedirect("https://sprightly-fenglisu-5c3f52.netlify.app/home");
                         })
                         .defaultSuccessUrl("/home", true)
                         .failureHandler(customAuthenticationFailureHandler())
