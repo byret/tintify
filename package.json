@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "heroku-postbuild": "cd pixapp-frontend && npm install && npm run build"
+    "heroku-postbuild": "npm install --prefix pixapp-frontend && npm run build --prefix pixapp-frontend && chmod +x node_modules/.bin/react-scripts"
   },
   "engines": {
     "node": "16.x"
