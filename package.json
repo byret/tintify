@@ -1,9 +1,0 @@
-{
-  "name": "pixapp-backend",
-  "version": "1.0.0",
-  "private": true,
-
-  "engines": {
-    "node": "16.x"
-  }
-}
