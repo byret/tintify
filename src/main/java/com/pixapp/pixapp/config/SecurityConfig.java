@@ -56,7 +56,10 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .headers(headers -> headers.frameOptions().sameOrigin())
-                .userDetailsService(userService);
+                .userDetailsService(userService)
+                .requiresChannel()
+                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+                .requiresSecure();
 
         return http.build();
     }
