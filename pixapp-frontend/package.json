@@ -18,11 +18,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm start",
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "cd pixapp-frontend && npm install && npm run build"
+    "test": "npm test",
+    "eject": "npm eject"
   },
   "eslintConfig": {
     "extends": [
