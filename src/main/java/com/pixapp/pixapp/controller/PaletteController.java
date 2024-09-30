@@ -46,7 +46,7 @@ public class PaletteController {
 
         paletteRepository.save(palette);
 
-        return ResponseEntity.ok("Palette saved successfully");
+        return ResponseEntity.ok("Palette saved successfully" + authentication);
     }
 
     @GetMapping("/user/{username}")
