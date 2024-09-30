@@ -54,17 +54,33 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login
                         .loginProcessingUrl("/login")
-                        .successHandler((request, response, authentication) -> {
+                        .successHandler((request, response, authentication, session) -> {
                             String username = authentication.getName();
                             response.getWriter().write("{\"message\": \"Login successful\", \"username\": \"" + username + "\"}");
                             response.setContentType("application/json");
                             response.setStatus(200);
+                            System.out.println("Session ID: " + session.getId());
+                            System.out.println("Authentication: " + (authentication != null ? authentication.getName() : "No authentication"));
+
                         })
                         .failureHandler(customAuthenticationFailureHandler())
                         .permitAll()
                 )
                 .headers(headers -> headers.frameOptions().sameOrigin())
                 .userDetailsService(userService);
+        http
+                .securityContext(securityContext ->
+                        securityContext
+                                .securityContextRepository(new HttpSessionSecurityContextRepository())
+                )
+                .sessionManagement(session ->
+                        session
+                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                );
+        http
+                .addFilterBefore(new SecurityContextPersistenceFilter(), UsernamePasswordAuthenticationFilter.class);
+        http
+                .anonymous().disable();
 
         return http.build();
     }
