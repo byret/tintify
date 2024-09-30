@@ -39,7 +39,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .addFilterBefore(new SecurityContextPersistenceFilter(), UsernamePasswordAuthenticationFilter.class)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
@@ -54,29 +53,18 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
-                        .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .successHandler((request, response, authentication) -> {
-                            HttpSession session = request.getSession(true);
-                            SecurityContext securityContext = SecurityContextHolder.getContext();
-                            session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
-
-                            response.setStatus(HttpServletResponse.SC_OK);
+                            String username = authentication.getName();
+                            response.getWriter().write("{\"message\": \"Login successful\", \"username\": \"" + username + "\"}");
                             response.setContentType("application/json");
-                            response.getWriter().write("{\"message\": \"Login successful\"}");
-                            response.getWriter().flush();
+                            response.setStatus(200);
                         })
                         .failureHandler(customAuthenticationFailureHandler())
                         .permitAll()
                 )
-                .headers(headers -> headers
-                        .contentSecurityPolicy("default-src 'self' https://sprightly-fenglisu-5c3f52.netlify.app; script-src 'self'; connect-src 'self' https://tintify-f9e20431ea39.herokuapp.com;")
-                )
-                .userDetailsService(userService)
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)  // Всегда создаём сессию
-                .maximumSessions(1)
-                .sessionRegistry(sessionRegistry());
+                .headers(headers -> headers.frameOptions().sameOrigin())
+                .userDetailsService(userService);
 
         return http.build();
     }
@@ -111,7 +99,6 @@ public class SecurityConfig {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
         serializer.setSameSite("None");
         serializer.setUseSecureCookie(true);
-        serializer.setUseHttpOnlyCookie(true);
         serializer.setCookiePath("/");
         return serializer;
     }
