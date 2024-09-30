@@ -2,6 +2,7 @@ package com.pixapp.pixapp.config;
 
 import com.pixapp.pixapp.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,9 +54,13 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .successHandler((request, response, authentication) -> {
-                            response.setStatus(HttpServletResponse.SC_OK);  // Статус 200 для успешного ответа
+                            HttpSession session = request.getSession(true);  // Создаём сессию, если её нет
+                            SecurityContext securityContext = SecurityContextHolder.getContext();
+                            session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
+
+                            response.setStatus(HttpServletResponse.SC_OK);
                             response.setContentType("application/json");
-                            response.getWriter().write("{\"message\": \"Login successful\", \"redirectUrl\": \"https://sprightly-fenglisu-5c3f52.netlify.app/home\"}");
+                            response.getWriter().write("{\"message\": \"Login successful\"}");
                             response.getWriter().flush();
                         })
                         .failureHandler(customAuthenticationFailureHandler())
