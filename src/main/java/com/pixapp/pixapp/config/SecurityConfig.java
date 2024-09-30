@@ -66,9 +66,10 @@ public class SecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .maximumSessions(1)
-                .sessionRegistry(sessionRegistry())
+                .sessionRegistry(sessionRegistry());
+        http
                 .securityContext()
-                .securityContextRepository(new HttpSessionSecurityContextRepository());
+                .securityContextRepository(new HttpSessionSecurityContextRepository())
 
         return http.build();
     }
