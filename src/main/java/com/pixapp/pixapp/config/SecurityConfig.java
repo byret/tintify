@@ -115,6 +115,7 @@ public class SecurityConfig {
         serializer.setSameSite("None");
         serializer.setUseSecureCookie(true);
         serializer.setCookiePath("/");
+        serializer.setUseHttpOnlyCookie(true);
         return serializer;
     }
 
