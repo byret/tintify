@@ -69,7 +69,7 @@ public class SecurityConfig {
                 .sessionRegistry(sessionRegistry());
         http
                 .securityContext()
-                .securityContextRepository(new HttpSessionSecurityContextRepository())
+                .securityContextRepository(new HttpSessionSecurityContextRepository());
 
         return http.build();
     }
