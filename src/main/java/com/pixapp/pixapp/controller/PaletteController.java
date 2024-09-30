@@ -7,6 +7,7 @@ import com.pixapp.pixapp.repository.LikeRepository;
 import com.pixapp.pixapp.repository.PaletteRepository;
 import com.pixapp.pixapp.repository.UserRepository;
 import com.pixapp.pixapp.service.PaletteService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -32,21 +33,35 @@ public class PaletteController {
     private PaletteService paletteService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createPalette(@RequestBody Palette paletteData, Authentication authentication) {
-         Palette palette = new Palette();
-         palette.setColors(paletteData.getColors());
-         palette.setPublic(paletteData.isPublic());
-         palette.setName(paletteData.getName());
-         if (authentication != null) {
-             Optional<User> user = userRepository.findByUsername(authentication.getName());
-             palette.setUser(user.orElse(null));
-         } else {
-             palette.setUser(null);
-         }
+    public ResponseEntity<?> createPalette(@RequestBody Palette paletteData, Authentication authentication, HttpSession session) {
+        if (authentication != null) {
+            System.out.println("Authenticated user: " + authentication.getName());
+        } else {
+            System.out.println("Authentication is null");
+        }
+
+        // Логируем текущую сессию
+        if (session != null) {
+            System.out.println("Session ID: " + session.getId());
+        } else {
+            System.out.println("No session found");
+        }
+
+        Palette palette = new Palette();
+        palette.setColors(paletteData.getColors());
+        palette.setPublic(paletteData.isPublic());
+        palette.setName(paletteData.getName());
+
+        if (authentication != null) {
+            Optional<User> user = userRepository.findByUsername(authentication.getName());
+            palette.setUser(user.orElse(null));
+        } else {
+            palette.setUser(null);
+        }
 
         paletteRepository.save(palette);
 
-        return ResponseEntity.ok("Palette saved successfully" + authentication);
+        return ResponseEntity.ok("Palette saved successfully");
     }
 
     @GetMapping("/user/{username}")
