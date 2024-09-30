@@ -54,12 +54,11 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login
                         .loginProcessingUrl("/login")
-                        .successHandler((request, response, authentication, session) -> {
+                        .successHandler((request, response, authentication) -> {
                             String username = authentication.getName();
                             response.getWriter().write("{\"message\": \"Login successful\", \"username\": \"" + username + "\"}");
                             response.setContentType("application/json");
                             response.setStatus(200);
-                            System.out.println("Session ID: " + session.getId());
                             System.out.println("Authentication: " + (authentication != null ? authentication.getName() : "No authentication"));
 
                         })
