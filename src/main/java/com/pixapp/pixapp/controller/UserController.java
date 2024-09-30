@@ -40,7 +40,7 @@ public class UserController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(new BCryptPasswordEncoder().encode(password));
-        user.setAvatarPath("../../resources/images/default-avatar.jpg");
+        user.setAvatarPath("public/default_avatar.png");
 
         userRepository.save(user);
         return ResponseEntity.ok("User registered successfully");
