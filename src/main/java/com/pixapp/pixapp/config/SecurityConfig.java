@@ -99,7 +99,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://tintify-f9e20431ea39.herokuapp.com", "https://sprightly-fenglisu-5c3f52.netlify.app",
                 "https://*.netlify.app",
-                "https://main--sprightly-fenglisu-5c3f52.netlify.app"));
+                "https://main--sprightly-fenglisu-5c3f52.netlify.app", "https://tintify.art", "https://api.tintify.art"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.setExposedHeaders(Arrays.asList("Authorization", "Link", "X-Total-Count"));
