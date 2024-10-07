@@ -40,4 +40,12 @@ public class Art {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
+
+    private int pixelSize;
+
+    @JsonProperty("isDownloadable")
+    private boolean isDownloadable;
+
+    @Lob
+    private String imageData;
 }

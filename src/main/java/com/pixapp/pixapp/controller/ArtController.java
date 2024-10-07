@@ -30,6 +30,9 @@ public class ArtController {
         art.setName(artData.getName());
         art.setWidth(artData.getWidth());
         art.setHeight(artData.getHeight());
+        art.setPixelSize(artData.getPixelSize());
+        art.setDownloadable(artData.isDownloadable());
+        Art savedArt = artRepository.save(art);
         if (authentication != null) {
             Optional<User> user = userRepository.findByUsername(authentication.getName());
             art.setUser(user.orElse(null));
@@ -39,7 +42,7 @@ public class ArtController {
 
         artRepository.save(art);
 
-        return ResponseEntity.ok("Palette saved successfully");
+        return ResponseEntity.ok(savedArt);
     }
 
     @GetMapping("/user/{username}")

@@ -40,7 +40,6 @@ public class PaletteController {
             System.out.println("Authentication is null");
         }
 
-        // Логируем текущую сессию
         if (session != null) {
             System.out.println("Session ID: " + session.getId());
         } else {
